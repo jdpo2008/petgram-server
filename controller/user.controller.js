@@ -116,7 +116,6 @@ const VerifyEmail = async (req, res) => {
     if (err || !post) {
       return res.send({ status: false, message: "User not found" });
     }
-    //res.sendfile(path.join(__dirname, "", "public/verify.html"));
     res.render("email");
   });
 };
