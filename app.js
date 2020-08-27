@@ -42,17 +42,24 @@ app.use("/image/profile", express.static("./public/images/profile"));
 app.use("/image/post", express.static("./public/images/post"));
 
 // Se asignan las rutas a usar
+
 app.use(UserRoute);
 app.use(PostRoute);
-
-// Si la url no es valida indica el error
-app.use("*", (req, res) => {
-  res.send({ status: false, message: "Endpoint not found" });
+app.get("/", (req, res) => {
+  res.send({
+    status: true,
+    message: "Api funcionando correctamente",
+  });
 });
 
 // enpoint para test del token
 app.use("/test", validarJWT, (req, res) => {
   res.send({ message: "success" });
+});
+
+// Si la url no es valida indica el error
+app.use("*", (req, res) => {
+  res.send({ status: false, message: "Endpoint not found" });
 });
 
 const PORT = process.env.PORT;
